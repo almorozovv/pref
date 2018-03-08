@@ -13,6 +13,6 @@ public class Game {
 
         System.out.println("Trump = " + Trump.getSuit());
 
-
+        Hand playerHand = new Hand(bot1, 2);
     }
 }
