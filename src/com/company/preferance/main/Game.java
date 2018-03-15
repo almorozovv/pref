@@ -6,8 +6,8 @@ import java.util.Scanner;
 public class Game {
 
     private int countPlayers;
-    private String playerName;
-    private ArrayList<String> playersNames;
+    //private String playerName;
+    private ArrayList<Player> players = new ArrayList<>();
 
     public void startGame() {
         Game game = new Game();
@@ -15,7 +15,7 @@ public class Game {
 
         Scanner in = new Scanner(System.in);
         do {
-            System.out.println("Пожалуйста введите количество игроков (от 1 до 3): ");
+            System.out.print("Пожалуйста введите количество игроков (от 1 до 3): ");
 
             while (!in.hasNextInt()) {
                 System.out.println("Прошу ввести корректное количество игроков!");
@@ -26,29 +26,20 @@ public class Game {
         } while ( countPlayers < 0 || countPlayers > 3);
 
         int countName = countPlayers;
+        String playerName;
 
         do {
-            System.out.println("Отлично! А теперь скажите как их зовут?");
+            System.out.print("Отлично! Пожалуйста введите имя игрока: ");
 
-            while (!in.hasNext()) {
-                System.out.println("Прошу введите имя!");
-                in.next();
-            }
-
+            in.nextLine();
+            // TODO необходимо контроль ввода данных пользователя
             playerName = in.next();
-            playersNames.add(playerName);
-            System.out.println("Привет, " + playerName + "Отличное имя!");
+
+            //создаем игроков
+            players.add(new Player(playerName));
+            System.out.println("Привет, " + playerName + ". Отличное имя!");
             countName--;
-        } while (playerName == null && countName > 0);
-
-
-
-
-        //TODO создаем игроков
-        //for (int i = 0; i < countPlayers; i++) {
-        // Player bot(тут вписать i) = new Player(тут имя из playersNames);
-        //}
-
+        } while (countName > 0);
 
         // Создаем колоду
         Deck deck = new Deck();
@@ -62,9 +53,8 @@ public class Game {
     }
 
     // TODO необходимо переделать.
-//        bot1.createHand(2, deck);
-//        bot2.createHand(2, deck);
-//        bot3.createHand(2, deck);
+
+
 
         // прикуп TODO
 

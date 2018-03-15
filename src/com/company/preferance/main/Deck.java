@@ -15,6 +15,7 @@ class Deck {
                 deck.add(new Card(i, j));
             }
         }
+        System.out.println("Колода создана.");
     }
 
     public ArrayList<Card> getDeck() {
@@ -31,6 +32,6 @@ class Deck {
     //shuffled
     public void shuffle() {
         Collections.shuffle(deck);
-        System.out.println("Deck is shuffled");
+        System.out.println("Колода перемешана.");
     }
 }
