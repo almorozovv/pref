@@ -23,9 +23,9 @@ class Deck {
     }
 
     // with remove
-    public Card removeTopCard(int i) {
-        Card card = deck.get(i);
-        deck.remove(i);
+    public Card getTopCard() {
+        Card card = deck.get(0);
+        deck.remove(0);
         return card;
     }
 

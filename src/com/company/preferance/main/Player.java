@@ -7,7 +7,7 @@ class Player {
     private final String name;
 
 
-    private ArrayList<Card> hand;
+    private ArrayList<Card> hand = new ArrayList<>();
     private Integer pool = 0;
     private Integer mount = 0;
     private Integer vists = 0;
@@ -47,11 +47,13 @@ class Player {
     public void setVists(Integer vists) {
         this.vists = vists;
     }
-
+    //TODO убрать отображение какие карты берутся из колоды.
     public void createHand(int count, Deck deck) {
         for (int j = 0; j < count; j++) {
-            hand.add(deck.getDeck().get(j));
-            hand.remove(j);
+            Card card = deck.getTopCard();
+            System.out.println("Карта " + card.getSuit() + " " + card.getRank() + " взята из колоды.");
+            hand.add(card);
+            System.out.println("Карта " + card.getSuit() + " " + card.getRank() + " добавлена.");
         }
     }
 }

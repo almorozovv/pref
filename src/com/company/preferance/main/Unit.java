@@ -1,8 +1,5 @@
 package com.company.preferance.main;
 
-import com.company.preferance.main.Card;
-import com.company.preferance.main.Deck;
-
 // for test
 class Unit {
 
@@ -28,7 +25,7 @@ class Unit {
 
         Game newGame = new Game();
 
-        newGame.startGame();
+        newGame.newGame();
 
 
     }
