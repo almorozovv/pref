@@ -2,18 +2,25 @@ package com.company.preferance.main;
 
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 
-public class Game {
+class Game {
+    private static Logger logger = Logger.getLogger(Game.class.getName()); //TODO настройка вывода в файл (log4j)
+    private final static int dealNumber = 5;
 
+    private int conventions;
     private int round;
     private int countPlayers;
-    private ArrayList<Player> players = new ArrayList<>();
+    private final List<Player> players = new ArrayList<>();
 
     public void newGame() {
+
         new Game();
         System.out.println("Добро пожаловать!");
+        logger.info("Игра запущена");
 
         Scanner in = new Scanner(System.in);
         do {
@@ -27,7 +34,8 @@ public class Game {
             countPlayers = in.nextInt();
         } while ( countPlayers < 0 || countPlayers > 3);
 
-        int countName = countPlayers;
+        int counts = countPlayers;
+        logger.info("Указано кол-во играков: " + countPlayers);
         String playerName;
 
         do {
@@ -39,13 +47,16 @@ public class Game {
 
             //создаем игроков
             players.add(new Player(playerName));
-            System.out.println("Привет, " + playerName + ". Отличное имя!");
-            countName--;
-        } while (countName > 0);
+            logger.info("Игрока зовут " + playerName);
+            counts--;
+        } while (counts > 0);
+        logger.info("Игроки созданы");
 
         // Создаем колоду
         Deck deck = new Deck();
+        logger.info("Колода создана");
         deck.shuffle();
+        logger.info("Колода перемешана");
         for (int i = 0; i < 32; i++) {
             System.out.println(deck.getDeck().get(i).getSuit() + " " + deck.getDeck().get(i).getRank());
         }
@@ -55,16 +66,17 @@ public class Game {
         // узнаем какая масть козырная
         System.out.println("Trump = " + Trump.getSuit());
 
-        // берем две карты из колоды для каждого игрока
-        for (int i = 0; i < countPlayers; i++) {
-            players.get(i).createHand(2,deck);
+        // берем две карты из колоды для каждого игрока 5 раз (10 карт на игрока)
+        // TODO две карты в прикуп
+        for (int j = 0; j < dealNumber; j++) {
+            for (int i = 0; i < countPlayers; i++) {
+                players.get(i).setHand(new Hand(2, deck));
+            }
         }
 
+        //TODO начинаем играть
+
     }
-
-
-
-    // прикуп TODO
 
 
         // если пулька одного из игроков 10, то игра должна закончиться (просто пример)

@@ -5,7 +5,7 @@ import java.util.Collections;
 
 class Deck {
 
-    private ArrayList<Card> deck;
+    private final ArrayList<Card> deck;
     final private int size = 32;
 
     Deck() {
@@ -15,7 +15,6 @@ class Deck {
                 deck.add(new Card(i, j));
             }
         }
-        System.out.println("Колода создана.");
     }
 
     public ArrayList<Card> getDeck() {
@@ -32,6 +31,5 @@ class Deck {
     //shuffled
     public void shuffle() {
         Collections.shuffle(deck);
-        System.out.println("Колода перемешана.");
     }
 }

@@ -1,13 +1,16 @@
 package com.company.preferance.main;
 
-import java.util.ArrayList;
+import java.util.logging.Logger;
 
 class Player {
-    // state
+
+
+    private static Logger logger = Logger.getLogger(Player.class.getName());
     private final String name;
+    private Hand hand;
 
 
-    private ArrayList<Card> hand = new ArrayList<>();
+
     private Integer pool = 0;
     private Integer mount = 0;
     private Integer vists = 0;
@@ -16,12 +19,16 @@ class Player {
         this.name = name;
     }
 
-    public ArrayList<Card> getHand() {
+    public String getName() {
+        return name;
+    }
+
+    public Hand getHand() {
         return hand;
     }
 
-    public String getName() {
-        return name;
+    public void setHand(Hand hand) {
+        this.hand = hand;
     }
 
     public Integer getPool() {
@@ -47,13 +54,5 @@ class Player {
     public void setVists(Integer vists) {
         this.vists = vists;
     }
-    //TODO убрать отображение какие карты берутся из колоды.
-    public void createHand(int count, Deck deck) {
-        for (int j = 0; j < count; j++) {
-            Card card = deck.getTopCard();
-            System.out.println("Карта " + card.getSuit() + " " + card.getRank() + " взята из колоды.");
-            hand.add(card);
-            System.out.println("Карта " + card.getSuit() + " " + card.getRank() + " добавлена.");
-        }
-    }
+
 }
