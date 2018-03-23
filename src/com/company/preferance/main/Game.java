@@ -4,14 +4,13 @@ package com.company.preferance.main;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 
 class Game {
     private static Logger logger = Logger.getLogger(Game.class.getName()); //TODO настройка вывода в файл (log4j)
-    private final static int dealNumber = 5;
 
-    private int conventions;
+    private int gameType ;
     private int round;
     private int countPlayers;
     private final List<Player> players = new ArrayList<>();
@@ -24,7 +23,7 @@ class Game {
 
         Scanner in = new Scanner(System.in);
         do {
-            System.out.print("Пожалуйста введите количество игроков (от 1 до 3): ");
+            System.out.print("Пожалуйста введите количество игроков (от 2 до 3): ");
 
             while (!in.hasNextInt()) {
                 System.out.println("Прошу ввести корректное количество игроков!");
@@ -32,7 +31,7 @@ class Game {
             }
 
             countPlayers = in.nextInt();
-        } while ( countPlayers < 0 || countPlayers > 3);
+        } while ( countPlayers < 2 || countPlayers > 3);
 
         int counts = countPlayers;
         logger.info("Указано кол-во играков: " + countPlayers);
@@ -47,16 +46,13 @@ class Game {
 
             //создаем игроков
             players.add(new Player(playerName));
-            logger.info("Игрока зовут " + playerName);
             counts--;
         } while (counts > 0);
-        logger.info("Игроки созданы");
+        logger.info("Игроки созданы.");
 
         // Создаем колоду
         Deck deck = new Deck();
-        logger.info("Колода создана");
         deck.shuffle();
-        logger.info("Колода перемешана");
         for (int i = 0; i < 32; i++) {
             System.out.println(deck.getDeck().get(i).getSuit() + " " + deck.getDeck().get(i).getRank());
         }
@@ -64,28 +60,40 @@ class Game {
         // создаем козырную карту
         Card Trump = new Card();  //
         // узнаем какая масть козырная
-        System.out.println("Trump = " + Trump.getSuit());
+        System.out.println("Trump = " + Trump.getSuit().toString());
 
-        // берем две карты из колоды для каждого игрока 5 раз (10 карт на игрока)
-        // TODO две карты в прикуп
-        for (int j = 0; j < dealNumber; j++) {
+        // берем две карты из колоды для каждого игрока 5 раз (10 карт на игрока).
+        for (int j = 0; j < 5; j++) {
             for (int i = 0; i < countPlayers; i++) {
                 players.get(i).setHand(new Hand(2, deck));
             }
         }
+        // раунд начался
+        round++;
 
-        //TODO начинаем играть
+        // 1 круг
+        for (int i = 0; i < countPlayers - 1; i++) {
+            Card card1 = players.get(i).getHand().getCard(0);
+            System.out.println(card1.getSuit().toString() + " " + card1.getRank().toString());
+            Card card2 = players.get(i).getHand().getCard(0);
+            System.out.println(card2.getSuit().toString() + " " + card2.getRank().toString());
+        }
 
     }
 
+    public int getRound() {
+        return round;
+    }
+    public int getGameType() {
+        return gameType;
+    }
 
-        // если пулька одного из игроков 10, то игра должна закончиться (просто пример)
-//        if (bot1.getPool() == 10 || bot2.getPool() == 10 || bot3.getPool() == 10) {
-//            game.endGame();
-//        }
-//
-//
-//    }
+    public int getCountPlayers() {
+        return countPlayers;
+    }
+    public List<Player> getPlayers() {
+        return players;
+    }
 
     private static void endGame() {
         // TODO

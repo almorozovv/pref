@@ -1,6 +1,6 @@
 package com.company.preferance.main;
 
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 class Player {
 
@@ -9,14 +9,13 @@ class Player {
     private final String name;
     private Hand hand;
 
-
-
     private Integer pool = 0;
     private Integer mount = 0;
     private Integer vists = 0;
 
     Player(String name) {
         this.name = name;
+        logger.info("Игрок " + name +" создан.");
     }
 
     public String getName() {
@@ -37,6 +36,7 @@ class Player {
 
     public void setPool(Integer pool) {
         this.pool = pool;
+        logger.info("Изменена пулька на " + pool + " для игрока: " + getName());
     }
 
     public Integer getMount() {
@@ -45,6 +45,7 @@ class Player {
 
     public void setMount(Integer mount) {
         this.mount = mount;
+        logger.info("Изменена гора на " + mount + " для игрока: " + getName());
     }
 
     public Integer getVists() {
@@ -53,6 +54,7 @@ class Player {
 
     public void setVists(Integer vists) {
         this.vists = vists;
+        logger.info("Изменены висты на " + mount + " для игрока: " + getName());
     }
 
 }
